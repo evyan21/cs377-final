@@ -9,6 +9,15 @@ struct OpStats {
     double throughput;
 };
 
+/**
+ * Measures the read performance.
+ * 
+ * Will read the file in blocks of blockSize and measure the time from start to end.
+ * 
+ * @param filename filename of the file
+ * @param blockSize size of how many bytes to read for each read()
+ * @return average access time and throughput, or 0.0 for both if unable to open file 
+*/
 OpStats measureRead(string filename, int blockSize) {
     ifstream input(filename, ios::ate);
 
@@ -47,6 +56,15 @@ OpStats measureRead(string filename, int blockSize) {
     return {avgAccessTime, throughput};
 }
 
+/**
+ * Measures the write performance.
+ * 
+ * Will write the file in blocks of blockSize and measure the time from start to end.
+ * 
+ * @param filename filename of the file
+ * @param blockSize size of how many bytes to write for each write()
+ * @return average access time and throughput, or 0.0 for both if unable to open file 
+*/
 OpStats measureWrite(string filename, int blockSize) {
     ofstream output(filename);
 
@@ -78,6 +96,15 @@ OpStats measureWrite(string filename, int blockSize) {
     return {avgAccessTime, throughput};
 }
 
+/**
+ * Measures the seek performance.
+ * 
+ * Will randomly seek for new position in file and measure the time from start to end.
+ * 
+ * @param filename filename of the file
+ * @param blockSize size of how many bytes to write for each write()
+ * @return average access time and throughput, or 0.0 for both if unable to open file 
+*/
 OpStats measureSeek(string filename, int numSeeks) {
     ifstream input(filename, ios::ate);
 
